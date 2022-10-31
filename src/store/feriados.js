@@ -7,7 +7,7 @@ export const feriadosStore = defineStore("feriados", () => {
     const dias = new Date();
     const diasFeriados=ref(null)
 try {
-    fetch ("http://nolaborables.com.ar/api/v2/feriados/2022")
+    fetch ("https://nolaborables.com.ar/api/v2/feriados/2022")
 .then (response=>response.json())
 .then (resp=>validateDate(resp))    
 } catch (error) {
