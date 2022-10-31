@@ -118,6 +118,7 @@
       <loadingSpin v-if="databaseStore.stateSpin"></loadingSpin>
 
       <h2 :class="`my-2 text-${warning}-400`">
+
         Estamos en el dia {{ feriados.dias.getDate() }} te queda {{ restantes }} dia para
         registrar tus horas de trabajo.
       </h2>
@@ -162,13 +163,13 @@ const restantes = diasMes - feriados.dias.getDate();
 
 const warning = computed(() => {
   const color = ref(null);
-
+console.log(restantes)
   if (restantes > 0 && restantes <= 20) {
     return (color.value = "green");
   } else if (restantes > 20) {
     return (color.value = "orange");
-  } else {
-    return (color.value = "red");
+  } else if(restantes==0) {
+    return (color.value = "rose");
   }
 });
 
