@@ -75,7 +75,7 @@
           >
 
           <button
-            class="bg-indigo-600 rounded p-1 text-gray-50"
+            class="btnfirst"
             @click="userStore.logoutUser"
             v-if="userStore.userData"
           >

@@ -65,7 +65,7 @@
           <div class="text-center lg:text-left">
             <button
               type="submit"
-              class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+              class="btnfirst"
             >
               Login
             </button>
@@ -95,6 +95,7 @@
   import { useUserStore } from "../store/user.js"
   import { notifyStore} from "../store/notify.js"
   import {ref} from 'vue'
+  import {useDatabaseStore} from "../store/database.js"
 /*   import { useRouter } from "vue-router"
  */  import { async } from "@firebase/util";
   
@@ -105,16 +106,19 @@
 const wrongPassword=ref(false) 
   const userStore = useUserStore();
   const notificacion = notifyStore();
- console.log(notificacion.logIn)
+
 
   
   const handleSubmit=async()=>{
-  
+
+    const databaseStore=useDatabaseStore()
+     
       if (userStore.email==='' || userStore.password==='') {
       return alert('Ingrese email y contraseña')
       }
   
       await userStore.loginUser(userStore.email,userStore.password)
+      
 /*   router.push('/')
  */      console.log("procesando formulario")
   }

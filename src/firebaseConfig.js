@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import {getAuth} from 'firebase/auth'
+import {getFirestore} from 'firebase/firestore/lite'
+
 const firebaseConfig = {
   apiKey: "AIzaSyApdFxj--jqq4Tf7LmMC7pIC_xwuJAKaJQ",
   authDomain: "vue-3-2022-b5f67.firebaseapp.com",
@@ -12,6 +14,6 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 const auth= getAuth()
+const db =getFirestore()
 
-
-export {auth}
+export {auth,db}

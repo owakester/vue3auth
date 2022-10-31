@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.btn {
-  @apply bg-green-300 rounded shadow-xl;
+.btnfirst {
+  @apply rounded shadow-sm hover:bg-teal-700  bg-teal-600 p-2 m-2 text-gray-50;
 }
 
 .barra {
