@@ -3,7 +3,7 @@
     class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900"
   >
     <div class="container flex flex-wrap justify-between items-center mx-auto">
-      <a href="https://flowbite.com/" class="flex items-center">
+      <a href="https://registrodetareas.netlify.app/" class="flex items-center">
         <img
           src="https://i.ibb.co/jJSQmh7/logo.png"
           class="rounded-full mr-3 h-8 sm:h-9"
