@@ -8,10 +8,10 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import router from "../router";
-import { createPinia } from 'pinia'
-import { getActivePinia } from "pinia"
+import { createPinia } from "pinia";
+import { getActivePinia } from "pinia";
 import { useDatabaseStore } from "./database";
-import storeReset from './plugins/storeReset'
+import storeReset from "./plugins/storeReset";
 export const useUserStore = defineStore("userStore", () => {
   const count = ref(0);
   let userData = ref(null);
@@ -33,7 +33,6 @@ export const useUserStore = defineStore("userStore", () => {
       userData.value = { email: user.email, uid: user.uid };
       userActive.value = user.email;
       router.push("/");
-      console.log(user);
     } catch (error) {
       if (userExist.value === null) {
         userExist.value =
@@ -47,17 +46,14 @@ export const useUserStore = defineStore("userStore", () => {
   };
 
   const loginUser = async (email, password) => {
-    
     const databaseStore = useDatabaseStore();
     try {
-
-      databaseStore.$reset
+      databaseStore.$reset;
 
       const { user } = await signInWithEmailAndPassword(auth, email, password);
-     
+
       userData.value = { email: user.email, uid: user.uid };
       userActive.value = user.email;
-      console.log(user);
       router.push("/");
     } catch (error) {
       console.log(error);
@@ -67,7 +63,7 @@ export const useUserStore = defineStore("userStore", () => {
   const logoutUser = () => {
     loading.value = true;
     const databaseStore = useDatabaseStore();
-  
+
     try {
       signOut(auth);
       userData.value = null;
@@ -77,8 +73,7 @@ export const useUserStore = defineStore("userStore", () => {
     } finally {
       loading.value = false;
       userActive.value = null;
-      databaseStore.$reset
-
+      databaseStore.$reset;
     }
   };
 
@@ -91,8 +86,6 @@ export const useUserStore = defineStore("userStore", () => {
             userData.value = { email: user.email, uid: user.uid };
           } else {
             userData.value = null;
-
-      
           }
           resolve(user);
         },

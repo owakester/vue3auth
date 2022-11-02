@@ -88,7 +88,7 @@
                           >
                             Agregar
                           </button>
-                          <p class="text-orange-400">{{msnFeriado}}</p>
+                          <p class="text-orange-400">{{ msnFeriado }}</p>
                         </div>
                       </div>
                     </form>
@@ -118,23 +118,11 @@
       <loadingSpin v-if="databaseStore.stateSpin"></loadingSpin>
 
       <h2 :class="`my-2 text-${warning}-400`">
-
-        Estamos en el dia {{ feriados.dias.getDate() }} te queda {{ restantes }} dia para
-        registrar tus horas de trabajo.
+        Estamos en el dia {{ feriados.dias.getDate() }} te queda
+        {{ restantes }} dia para registrar tus horas de trabajo.
       </h2>
 
       <PlanillaEmpleados />
-
-      <!--  <div class="grid grid-cols-12 gap-4 border-t-4 m-12">
-        <button
-          @click="showComponent(num)"
-          v-for="num in 10"
-          :key="num"
-          class="px-3 text-center rounded-full relative bottom-3 bg-teal-500 mx-2 shadow-sm text-gray-100 hover:bg-teal-600"
-        >
-          {{ num }}
-        </button>
-      </div> -->
     </div>
   </div>
 </template>
@@ -155,59 +143,42 @@ const { userData } = userStore;
 const databaseStore = useDatabaseStore();
 const url = ref("");
 const horas = ref("");
-const feriados=feriadosStore()
-const msnFeriado=ref(null)
-const diasMes = new Date(feriados.dias.getFullYear(), feriados.dias.getMonth() + 1, 0).getDate();
+const feriados = feriadosStore();
+const msnFeriado = ref(null);
+const diasMes = new Date(
+  feriados.dias.getFullYear(),
+  feriados.dias.getMonth() + 1,
+  0
+).getDate();
 const restantes = diasMes - feriados.dias.getDate();
-
 
 const warning = computed(() => {
   const color = ref(null);
-console.log(restantes)
   if (restantes > 0 && restantes <= 20) {
     return (color.value = "green");
-  } else if (restantes > 20) {
+  } else if (feriados.dias.getDate() > 20) {
     return (color.value = "orange");
-  } else if(restantes==0) {
+  } else if (restantes == 0) {
     return (color.value = "rose");
   }
 });
-
-
-
-
-
-console.log(diasMes);
-console.log(feriados.dias.getDate());
-
-/* Reset store para que no carguen de vuelta */
 onBeforeUnmount(() => {
   databaseStore.$reset();
 });
 
 const handleSubmit = () => {
-  console.log("agregando");
+  const selectDate = feriados.dateSelect.substring(8, 10);
 
-const selectDate= feriados.dateSelect.substring(8, 10)
-
-
-feriados.diasFeriados.forEach(element => {
-  
-  if (  element.dia==selectDate) {
-   msnFeriado.value=`Recuerda que el dia ${element.dia} corresponde al feriado por ${element.motivo}`
-  }
-
-  
-});
-
+  feriados.diasFeriados.forEach((element) => {
+    if (element.dia == selectDate) {
+      msnFeriado.value = `Recuerda que el dia ${element.dia} corresponde al feriado por ${element.motivo}`;
+    }
+  });
 
   databaseStore.addUrls(url.value, horas.value, feriados.dateSelect);
 };
 
 const size = ref(0);
-const showComponent = (num) => {
-  console.log(num);
-};
 
 const changesize = () => {
   setInterval(() => {
